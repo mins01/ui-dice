@@ -85,5 +85,17 @@
       </div>
       
     </div>
+    <script>
+      window.addEventListener('load',()=>{
+        const dice = document.getElementById('dice')
+        dice.addEventListener('start-rolling',(event)=>{
+          console.log(event.type);
+        })
+        dice.addEventListener('stop-rolling',(event)=>{
+          console.log(event.type,event.target.value);
+
+        })
+      })
+    </script>
 </body>
 </html>

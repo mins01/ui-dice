@@ -276,6 +276,12 @@ export default class Dice6Element extends HTMLElement {
     }
     callback();
     this.tmRolling = setInterval(callback,100)
+
+    this.dispatchEvent(new CustomEvent('start-rolling', {
+      bubbles: true,
+      composed: true
+    }));
+
   }
   stopRolling(num=null){
     if(!this.tmRolling && !num ){ return;}
@@ -287,6 +293,11 @@ export default class Dice6Element extends HTMLElement {
     this.rollingCount = 0;
     this.dice.classList.remove('rolling');
     this.value = num??Math.floor(Math.random()*6)+1;
+
+    this.dispatchEvent(new CustomEvent('stop-rolling', {
+      bubbles: true,
+      composed: true
+    }));
   }
 
 
