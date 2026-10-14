@@ -18,7 +18,7 @@ export default class Dice6Element extends HTMLElement {
       .dice-container{
         aspect-ratio: 1/1;
         transform-style: preserve-3d;
-        perspective: 100cqw;
+        perspective: 120cqw;
         container-type: inline-size;
         width: 100%;
         height: 100%;
@@ -36,6 +36,7 @@ export default class Dice6Element extends HTMLElement {
         height: 100%;
         position: relative;
         transform-style: preserve-3d;
+        transform-origin: center center;
         transform: rotateX( calc( var(--rx) + var(--rmx) ) ) rotateY( calc( var(--ry) + var(--rmy) ) );
         transition: transform 2s cubic-bezier(.25,.1,.5,1.1);
       }
@@ -113,23 +114,19 @@ export default class Dice6Element extends HTMLElement {
 
       .dice[data-rotation-multiplier="1"]{
         --rmx:3600deg;
-        --rmy:3600deg;  
-        xtransform: rotateX(calc(var(--rx) + 360deg * 10)) rotateY(calc(var(--ry) + 360deg * 10));
+        --rmy:3600deg;
       }
       .dice[data-rotation-multiplier="2"]{
         --rmx:-3600deg;
-        --rmy:3600deg;  
-        xtransform: rotateX(calc(var(--rx) - 360deg * 10)) rotateY(calc(var(--ry) + 360deg * 10));
+        --rmy:3600deg;
       }
       .dice[data-rotation-multiplier="3"]{
         --rmx:-3600deg;
-        --rmy:-3600deg;  
-        xtransform: rotateX(calc(var(--rx) - 360deg * 10)) rotateY(calc(var(--ry) - 360deg * 10));
+        --rmy:-3600deg;
       }
       .dice[data-rotation-multiplier="4"]{
         --rmx:3600deg;
-        --rmy:-3600deg;  
-        xtransform: rotateX(calc(var(--rx) + 360deg * 10)) rotateY(calc(var(--ry) - 360deg * 10));
+        --rmy:-3600deg;
       }
 
 
@@ -156,13 +153,13 @@ export default class Dice6Element extends HTMLElement {
       }
 
       .dice[data-value="5"] {
-          --rx: -75deg;
-          --ry: 15deg;
+          --rx: -60deg;
+          --ry: 30deg;
       }
 
       .dice[data-value="6"] {
-          --rx: 105deg;
-          --ry: 15deg;
+          --rx: 120deg;
+          --ry: 30deg;
       }
 
       .dice[data-value="99"] {
