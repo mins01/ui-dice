@@ -1,0 +1,120 @@
+<style>
+.container {  
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  container-type: inline-size;
+}
+
+.dice{
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;  
+  transform: rotateX(270deg) rotateY(0deg) rotateZ(0deg);
+  
+  
+}
+
+
+.face{
+  backface-visibility: hidden;
+  width:100cqw;
+  aspect-ratio: 1/1;
+  border-radius: 100vmax;
+  outline: 2px solid #abc;
+  background-color: #cba3;
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+}
+.face:nth-child(1) {
+  border-bottom-color: rgba(255, 0, 0, 0.15);
+  transform:   rotateY(0deg) rotateX(19.471221deg) translateZ(17.67767cqw);
+}
+.face:nth-child(2) {
+  border-bottom-color: rgba(255, 255, 0, 0.15);
+  transform: rotateY(120deg) rotateX(19.471221deg) translateZ(17.67767cqw);
+}
+.face:nth-child(3) {
+  border-bottom-color: rgba(0, 128, 0, 0.15);
+  transform: rotateY(240deg) rotateX(19.471221deg) translateZ(17.67767cqw);
+}
+.face:nth-child(4) {
+  border-bottom-color: rgba(0, 0, 255, 0.15);
+  transform: rotateX(-90deg) rotateZ(180deg) translateZ(17.67767cqw);
+}
+.face::after{
+  content: "";
+  display: block;
+  height: 100%;
+  clip-path: polygon(
+    50% 0,
+    6.69873% 75%,
+    93.30127% 75%
+  );
+}
+.face:nth-child(1)::after {
+  background-color: rgba(255, 0, 0, 1);
+}
+.face:nth-child(2)::after {
+  background-color: rgba(255, 255, 0, 1);
+}
+.face:nth-child(3)::after {
+  background-color: rgba(0, 128, 0, 1);
+}
+.face:nth-child(4)::after {
+  background-color: rgb(78, 68, 216);
+}  
+.face  .number{
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top:20px;
+  font-size: max(8px, 10cqw);
+  font-weight: 700;
+}
+.face .number:nth-child(1){
+  transform: rotateZ(0deg)
+}
+.face .number:nth-child(2){
+  transform: rotateZ(120deg)
+}
+.face .number:nth-child(3){
+  transform: rotateZ(240deg)
+}
+
+
+
+
+</style>
+
+
+<div class="container">
+    <div class="dice" part="dice">
+      <div class="face bottom-num-4" part="face bottom-num-4">
+        <div class="number number-1" part="number number-1">1</div>
+        <div class="number number-2" part="number number-2">2</div>
+        <div class="number number-3" part="number number-3">3</div>
+      </div>
+      <div class="face bottom-num-3" part="face bottom-num-3">
+        <div class="number number-1" part="number number-1">1</div>
+        <div class="number number-4" part="number number-4">4</div>
+        <div class="number number-2" part="number number-2">2</div>
+      </div>
+      <div class="face bottom-num-2" part="face bottom-num-2">
+        <div class="number number-1" part="number number-1">1</div>
+        <div class="number number-3" part="number number-3">3</div>
+        <div class="number number-4" part="number number-4">4</div>
+      </div>
+      <div class="face bottom-num-1" part="face bottom-num-1">
+        <div class="number number-4" part="number number-4">4</div>
+        <div class="number number-3" part="number number-3">3</div>
+        <div class="number number-2" part="number number-2">2</div>
+      </div>
+    </div>
+  </div>

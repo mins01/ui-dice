@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+.scene {
+  width: 240px;
+  height: 240px;
+  display: grid;
+  place-items: center;
+  perspective: 700px;
+}
+
+.tetrahedron {
+  --side: 120px;
+  --height: 103.923px;
+  --fold: 70.5288deg;
+
+  position: relative;
+  width: var(--side);
+  height: var(--height);
+  transform-style: preserve-3d;
+  transform: rotateX(-25deg) rotateY(25deg);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  width: var(--side);
+  height: var(--height);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+}
+
+/* 기준 면 */
+.face-a {
+  background: #3b82f6;
+  transform: translateZ(0);
+}
+
+/* 다른 두 측면 */
+.face-b {
+  background: #22c55e;
+  transform: rotateY(120deg) rotateX(0deg);
+}
+
+.face-c {
+  background: #f59e0b;
+  transform: rotateY(240deg) rotateX(0deg);
+}
+
+/* 밑면 */
+.face-d {
+  background: #ef4444;
+  transform: rotateX(180deg);
+}
+</style>
+</head>
+<body>
+  <div class="scene">
+    <div class="tetrahedron">
+      <div class="face face-a"></div>
+      <div class="face face-b"></div>
+      <div class="face face-c"></div>
+      <div class="face face-d"></div>
+    </div>
+  </div>
+</body>
+</html>
