@@ -3,6 +3,7 @@ export default class Dice6Element extends HTMLElement {
   static define(name='dice-6'){
     customElements.define(name, this);
   }
+  static MAX_VALUE = 6;
   constructor() {
     super();
 
@@ -10,28 +11,32 @@ export default class Dice6Element extends HTMLElement {
 
     shadowRoot.innerHTML = `
       <style>
-        :host {
-          display: inline-block;
-          width:200px;
-          
-        }
-      .dice-container{
-        aspect-ratio: 1/1;
-        transform-style: preserve-3d;
-        perspective: 120cqw;
-        container-type: inline-size;
+      :host {
+        aspect-ratio: 1 / 1;
         width: 100%;
-        height: 100%;
-      }
-      .dice {
-        --size: 100cqw;
-        --half-size: 50cqw;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        overflow:hidden;
 
         --rx:15deg;
         --ry:15deg;
         --rmx:0deg;
         --rmy:0deg;
+      }
+      .container{
+        aspect-ratio: 1/1;
+        transform-style: preserve-3d;
+        perspective: 120cqw;
+        container-type: inline-size;
+        width: 60%;
+        height: 60%;
+      }
+      .dice {
+        pointer-events: none;
 
+        --size: 100cqw;
+        --half-size: 50cqw;
         width: 100%;
         height: 100%;
         position: relative;
@@ -167,7 +172,7 @@ export default class Dice6Element extends HTMLElement {
           --ry: calc(360deg * 10);
       }
       </style>
-      <div class="dice-container" part="dice-container">
+      <div class="container" part="container">
         <div class="dice" part="dice" data-value="1">
           <div class="face face1">
             <span class="dot" style="grid-area:2/2"></span>
@@ -239,8 +244,8 @@ export default class Dice6Element extends HTMLElement {
   set value(newValue) {
     const value = Number(newValue);
 
-    if (!Number.isInteger(value) || value < 1 || value > 6) {
-      throw new RangeError('Dice value must be an integer between 1 and 6.');
+    if (!Number.isInteger(value) || value < 1 || value > this.constructor.MAX_VALUE) {
+      throw new RangeError(`Dice value must be an integer between 1 and ${this.constructor.MAX_VALUE}.`);
     }
 
     this.setAttribute('value', value);
@@ -268,7 +273,7 @@ export default class Dice6Element extends HTMLElement {
     this.dice.classList.add('rolling');
     const callback = ()=>{
       this.rollingCount++;
-      this.value = Math.floor(Math.random()*6)+1;
+      this.value = Math.floor(Math.random() * this.constructor.MAX_VALUE)+1;
       this.dice.dataset.rotationMultiplier = this.rollingCount % 4 + 1;
     }
     callback();

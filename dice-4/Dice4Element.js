@@ -230,8 +230,8 @@ export default class Dice4Element extends HTMLElement {
   set value(newValue) {
     const value = Number(newValue);
 
-    if (!Number.isInteger(value) || value < 1 || value > Dice4Element.MAX_VALUE) {
-      throw new RangeError(`Dice value must be an integer between 1 and ${Dice4Element.MAX_VALUE}.`);
+    if (!Number.isInteger(value) || value < 1 || value > this.constructor.MAX_VALUE) {
+      throw new RangeError(`Dice value must be an integer between 1 and ${this.constructor.MAX_VALUE}.`);
     }
 
     this.setAttribute('value', value);
@@ -259,7 +259,7 @@ export default class Dice4Element extends HTMLElement {
     this.dice.classList.add('rolling');
     const callback = ()=>{
       this.rollingCount++;
-      this.value = Math.floor(Math.random() * Dice4Element.MAX_VALUE)+1;
+      this.value = Math.floor(Math.random() * this.constructor.MAX_VALUE)+1;
       this.dice.dataset.rotationMultiplier = this.rollingCount % 4 + 1;
     }
     callback();
