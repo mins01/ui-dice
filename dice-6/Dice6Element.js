@@ -25,25 +25,40 @@ export default class Dice6Element extends HTMLElement {
         --rmy:0deg;
       }
       .container{
-        aspect-ratio: 1/1;
+        
         transform-style: preserve-3d;
         perspective: 120cqw;
-        container-type: inline-size;
-        width: 60%;
-        height: 60%;
+        width:100%;height:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       .dice {
         pointer-events: none;
-
+        user-select: none;
+        aspect-ratio: 1/1;
+        container-type: inline-size;
+        width: 55%;
+        height: 55%;
         --size: 100cqw;
-        --half-size: 50cqw;
-        width: 100%;
-        height: 100%;
+        --half-size: 50cqw;       
+
         position: relative;
         transform-style: preserve-3d;
         transform-origin: center center;
         transform: rotateX( calc( var(--rx) + var(--rmx) ) ) rotateY( calc( var(--ry) + var(--rmy) ) );
         transition: transform 2s cubic-bezier(.25,.1,.5,1.1);
+      }
+
+      :host(.debug) .face,
+      .host.debug .face {
+        outline: 2px solid #abc;
+        background-color: #cba3;
+      }
+
+      :host(.debug) .dice,
+      .host.debug .dice {
+        transition: none;
       }
 
       .face {
@@ -144,16 +159,16 @@ export default class Dice6Element extends HTMLElement {
 
       .dice[data-value="2"] {
           --rx: 15deg;
-          --ry: -75deg;
+          --ry: 254deg;
       }
 
       .dice[data-value="3"] {
-          --rx: 15deg;
-          --ry: -165deg;
+        --rx: -15deg;
+        --ry: 160deg;
       }
 
       .dice[data-value="4"] {
-          --rx: 15deg;
+          --rx: -15deg;
           --ry: 105deg;
       }
 
