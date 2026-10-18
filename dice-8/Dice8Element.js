@@ -56,11 +56,12 @@ export default class Dice8Element extends HTMLElement {
       .dice {
         container-type: inline-size;
         aspect-ratio: 1/1;
-        /* pointer-events: none; */
+        user-select:none;
+        pointer-events: none;
         position: relative;
         margin: 0 auto;
-        width: 70%;
-        height: 70%;
+        width: 80%;
+        height: 80%;
         transform-style: preserve-3d;
         transform: rotateX(calc(var(--rx) + var(--rmx))) rotateY(calc(var(--ry) + var(--rmy))) rotateZ(calc(var(--rz) + var(--rmz)));
         /* transform: rotateX(0deg) rotateY(45deg) rotateZ(0deg); */
@@ -235,6 +236,7 @@ export default class Dice8Element extends HTMLElement {
     this.isRolling = false;
     this.rollingCount = 0;
 
+    this.value = 1;
 
   }
 
@@ -309,12 +311,10 @@ export default class Dice8Element extends HTMLElement {
     this.dice.dataset.rotationMultiplier = this.rollingCount % 4 + 1;
     this.rollingCount = 0;
     this.dice.classList.remove('rolling');
-    this.value = num??Math.floor(Math.random()*6)+1;
+    this.value = num??Math.floor( Math.random() * this.constructor.MAX_VALUE )+1;
 
-    this.dispatchEvent(new CustomEvent('stop-rolling', {
-      bubbles: true,
-      composed: true
-    }));
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    this.dispatchEvent(new CustomEvent('stop-rolling', { bubbles: true, composed: true }));
   }
 
 

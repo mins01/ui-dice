@@ -294,12 +294,10 @@ export default class Dice6Element extends HTMLElement {
     this.dice.dataset.rotationMultiplier = this.rollingCount % 4 + 1;
     this.rollingCount = 0;
     this.dice.classList.remove('rolling');
-    this.value = num??Math.floor(Math.random()*6)+1;
+    this.value = num??Math.floor( Math.random() * this.constructor.MAX_VALUE )+1;
 
-    this.dispatchEvent(new CustomEvent('stop-rolling', {
-      bubbles: true,
-      composed: true
-    }));
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    this.dispatchEvent(new CustomEvent('stop-rolling', { bubbles: true, composed: true }));
   }
 
 

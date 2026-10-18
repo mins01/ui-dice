@@ -46,9 +46,15 @@ export default class Dice4Element extends HTMLElement {
         transition: transform 2s cubic-bezier(.25,.1,.5,1.1);
       }
 
-      :host(.debug) .face{
+      :host(.debug) .face,
+      .host.debug .face {
         outline: 2px solid #abc;
         background-color: #cba3;
+      }
+
+      :host(.debug) .dice,
+      .host.debug .dice {
+        transition: none;
       }
 
       .face{
@@ -88,18 +94,10 @@ export default class Dice4Element extends HTMLElement {
           93.30127% 75%
         );
       }
-      .face:nth-child(1)::after {
-        background-color: rgba(255, 0, 0, 1);
-      }
-      .face:nth-child(2)::after {
-        background-color: rgba(255, 255, 0, 1);
-      }
-      .face:nth-child(3)::after {
-        background-color: rgba(0, 128, 0, 1);
-      }
-      .face:nth-child(4)::after {
-        background-color: rgb(78, 68, 216);
-      }  
+      .face:nth-child(1)::after { background-color: hsl(0deg   80% 70%);     }
+      .face:nth-child(2)::after { background-color: hsl(90deg  80% 70%);       }
+      .face:nth-child(3)::after { background-color: hsl(180deg 80% 70%);     }
+      .face:nth-child(4)::after { background-color: hsl(270deg 80% 70%);   }  
       .face  .number{
         position: absolute;
         z-index: 1;
@@ -205,6 +203,7 @@ export default class Dice4Element extends HTMLElement {
     this.tmRolling = null;
     this.isRolling = false;
     this.rollingCount = 0;
+    this.value = 1;
 
 
   }
@@ -280,12 +279,10 @@ export default class Dice4Element extends HTMLElement {
     this.dice.dataset.rotationMultiplier = this.rollingCount % 4 + 1;
     this.rollingCount = 0;
     this.dice.classList.remove('rolling');
-    this.value = num??Math.floor(Math.random()*6)+1;
+    this.value = num??Math.floor( Math.random() * this.constructor.MAX_VALUE )+1;
 
-    this.dispatchEvent(new CustomEvent('stop-rolling', {
-      bubbles: true,
-      composed: true
-    }));
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    this.dispatchEvent(new CustomEvent('stop-rolling', { bubbles: true, composed: true }));
   }
 
 

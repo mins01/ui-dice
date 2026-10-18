@@ -97,7 +97,9 @@
         })
         dice.addEventListener('stop-rolling',(event)=>{
           console.log(event.type,event.target.value);
-
+        })
+        dice.addEventListener('change',(event)=>{
+          console.log(event.type,event.target.value);
         })
       })
     </script>
