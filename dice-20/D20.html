@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>3D CSS Icosahedron</title>
+  <style>
+    :root {
+      /* 정삼각형 한 변의 길이 */
+      --side-length: 120px;
+      /* 수학적으로 계산된 중심에서 면까지의 내접구 반지름 */
+      --radius: 90.5px; 
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      overflow: hidden;
+      perspective: 800px;
+    }
+
+    /* 3D 가상 공간 무대 */
+    .scene {
+      width: 300px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* 정20면체 래퍼: 마우스를 올리면 회전합니다 */
+    .icosahedron {
+      width: 0;
+      height: 0;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateX(-20deg) rotateY(20deg);
+      animation: spin 16s linear infinite;
+    }
+
+    .icosahedron:hover {
+      animation-play-state: paused;
+    }
+
+    /* 모든 삼각형 면의 공통 스타일 */
+    .face {
+      position: absolute;
+      /* 정삼각형의 너비와 높이 비율 반영 */
+      width: var(--side-length);
+      height: calc(var(--side-length) * 0.866); 
+      left: calc(var(--side-length) / -2);
+      top: calc(var(--side-length) * 0.866 / -2);
+      
+      /* CSS clip-path로 정삼각형 만들기 (위를 향하는 기본 모양) */
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      
+      /* 반투명한 색상과 테두리 효과 */
+      background: rgba(0, 180, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      backface-visibility: visible;
+    }
+
+    /* ----------------------------------------------------
+       삼각형 면 배치 (transform 연산 순서 중요)
+       순서: rotateY -> rotateX -> rotateZ -> translateZ
+       ---------------------------------------------------- */
+
+    /* [그룹 1] 상단 캡 5개 (Top Cap: 위를 향함)
+       경사각: 52.62deg, Y축 방위각: 72deg 간격 */
+    .face:nth-child(1)  { transform: rotateY(0deg)   rotateX(52.62deg)  translateZ(var(--radius)); background-color: rgba(255, 87, 34, 0.6); }
+    .face:nth-child(2)  { transform: rotateY(72deg)  rotateX(52.62deg)  translateZ(var(--radius)); background-color: rgba(255, 152, 0, 0.6); }
+    .face:nth-child(3)  { transform: rotateY(144deg) rotateX(52.62deg)  translateZ(var(--radius)); background-color: rgba(255, 235, 59, 0.6); }
+    .face:nth-child(4)  { transform: rotateY(216deg) rotateX(52.62deg)  translateZ(var(--radius)); background-color: rgba(76, 175, 80, 0.6); }
+    .face:nth-child(5)  { transform: rotateY(288deg) rotateX(52.62deg)  translateZ(var(--radius)); background-color: rgba(0, 150, 136, 0.6); }
+
+    /* [그룹 2] 중앙 벨트 - 위를 향하는 5개 (Middle Up)
+       경사각: 10.81deg, Y축 방위각: 36deg 엇갈림 시작 */
+    .face:nth-child(6)  { transform: rotateY(36deg)  rotateX(10.81deg)  translateZ(var(--radius)); background-color: rgba(0, 188, 212, 0.6); }
+    .face:nth-child(7)  { transform: rotateY(108deg) rotateX(10.81deg)  translateZ(var(--radius)); background-color: rgba(31, 150, 243, 0.6); }
+    .face:nth-child(8)  { transform: rotateY(180deg) rotateX(10.81deg)  translateZ(var(--radius)); background-color: rgba(63, 81, 181, 0.6); }
+    .face:nth-child(9)  { transform: rotateY(252deg) rotateX(10.81deg)  translateZ(var(--radius)); background-color: rgba(156, 39, 176, 0.6); }
+    .face:nth-child(10) { transform: rotateY(324deg) rotateX(10.81deg)  translateZ(var(--radius)); background-color: rgba(233, 30, 99, 0.6); }
+
+    /* [그룹 3] 중앙 벨트 - 아래를 향하는 5개 (Middle Down)
+       경사각: -10.81deg, rotateZ(180deg)로 상하 반전 */
+    .face:nth-child(11) { transform: rotateY(0deg)   rotateX(-10.81deg) rotateZ(180deg) translateZ(var(--radius)); background-color: rgba(0, 150, 136, 0.6); }
+    .face:nth-child(12) { transform: rotateY(72deg)  rotateX(-10.81deg) rotateZ(180deg) translateZ(var(--radius)); background-color: rgba(76, 175, 80, 0.6); }
+    .face:nth-child(13) { transform: rotateY(144deg) rotateX(-10.81deg) rotateZ(180deg) translateZ(var(--radius)); background-color: rgba(255, 235, 59, 0.6); }
+    .face:nth-child(14) { transform: rotateY(216deg) rotateX(-10.81deg) rotateZ(180deg) translateZ(var(--radius)); background-color: rgba(255, 152, 0, 0.6); }
+    .face:nth-child(15) { transform: rotateY(288deg) rotateX(-10.81deg) rotateZ(180deg) translateZ(var(--radius)); background-color: rgba(255, 87, 34, 0.6); }
+
+    /* [그룹 4] 하단 캡 5개 (Bottom Cap: 아래를 향함)
+       경사각: -52.62deg, Y축 방위각: 36deg 엇갈림 시작, rotateZ(180deg)로 상하 반전 */
+    .face:nth-child(16) { transform: rotateY(36deg)  rotateX(-52.62deg) rotateZ(180deg) translateZ(var(--radius)); background-color: rgba(233, 30, 99, 0.6); }
+    .face:nth-child(17) { transform: rotateY(108deg) rotateX(-52.62deg) rotateZ(180deg) translateZ(var(--radius)); background-color: rgba(156, 39, 176, 0.6); }
+    .face:nth-child(18) { transform: rotateY(180deg) rotateX(-52.62deg) rotateZ(180deg) translateZ(var(--radius)); background-color: rgba(63, 81, 181, 0.6); }
+    .face:nth-child(19) { transform: rotateY(252deg) rotateX(-52.62deg) rotateZ(180deg) translateZ(var(--radius)); background-color: rgba(31, 150, 243, 0.6); }
+    .face:nth-child(20) { transform: rotateY(324deg) rotateX(-52.62deg) rotateZ(180deg) translateZ(var(--radius)); background-color: rgba(0, 188, 212, 0.6); }
+
+    /* 자동 회전 애니메이션 */
+    @keyframes spin {
+      0%   { transform: rotateX(0deg) rotateY(0deg); }
+      100% { transform: rotateX(360deg) rotateY(720deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scene">
+    <div class="icosahedron">
+      <!-- 상단 캡 5개 -->
+      <div class="face"></div>
+      <div class="face"></div>
+      <div class="face"></div>
+      <div class="face"></div>
+      <div class="face"></div>
+
+      <!-- 중앙 벨트 (위 방향 5개) -->
+      <div class="face"></div>
+      <div class="face"></div>
+      <div class="face"></div>
+      <div class="face"></div>
+      <div class="face"></div>
+
+      <!-- 중앙 벨트 (아래 방향 5개) -->
+      <div class="face"></div>
+      <div class="face"></div>
+      <div class="face"></div>
+      <div class="face"></div>
+      <div class="face"></div>
+
+      <!-- 하단 캡 5개 -->
+      <div class="face"></div>
+      <div class="face"></div>
+      <div class="face"></div>
+      <div class="face"></div>
+      <div class="face"></div>
+    </div>
+  </div>
+
+</body>
+</html>
