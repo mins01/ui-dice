@@ -287,8 +287,7 @@ export default class Dice12Element extends HTMLElement {
     this.isRolling = false;
     this.rollingCount = 0;
 
-    this.value = 1;
-
+    this.dice.dataset.value = 1;
   }
 
   static get observedAttributes() {

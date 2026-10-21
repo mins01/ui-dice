@@ -204,9 +204,8 @@ export default class Dice4Element extends HTMLElement {
     this.tmRolling = null;
     this.isRolling = false;
     this.rollingCount = 0;
-    this.value = 1;
 
-
+    this.dice.dataset.value = 1;
   }
 
   static get observedAttributes() {

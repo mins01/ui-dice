@@ -12,17 +12,16 @@ export default class Dice6Element extends HTMLElement {
     shadowRoot.innerHTML = `
       <style>
       :host {
-        aspect-ratio: 1 / 1;
-        width: 100%;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        overflow:hidden;
-
+        display: inline-block;
+        width:100%;
+        aspect-ratio: 1/1;
         --rx:15deg;
         --ry:15deg;
+        --rz:10deg;
+
         --rmx:0deg;
         --rmy:0deg;
+        --rmz:0deg;
       }
       .container{
         
@@ -236,6 +235,8 @@ export default class Dice6Element extends HTMLElement {
     this.tmRolling = null;
     this.isRolling = false;
     this.rollingCount = 0;
+
+    this.dice.dataset.value = 1;
   }
 
   static get observedAttributes() {
