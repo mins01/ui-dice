@@ -94,10 +94,10 @@ export default class Dice4Element extends HTMLElement {
           93.30127% 75%
         );
       }
-      .face:nth-child(1)::after { background-color: hsl(0deg   80% 70%);     }
-      .face:nth-child(2)::after { background-color: hsl(90deg  80% 70%);       }
-      .face:nth-child(3)::after { background-color: hsl(180deg 80% 70%);     }
-      .face:nth-child(4)::after { background-color: hsl(270deg 80% 70%);   }  
+      .face:nth-child(1)::after { background-color: hsl(0deg   30% 60%);  }
+      .face:nth-child(2)::after { background-color: hsl(90deg  30% 60%);  }
+      .face:nth-child(3)::after { background-color: hsl(180deg 30% 60%);  }
+      .face:nth-child(4)::after { background-color: hsl(270deg 30% 60%);  }  
       .face  .number{
         position: absolute;
         z-index: 1;
@@ -121,7 +121,8 @@ export default class Dice4Element extends HTMLElement {
 
 
 
-
+    </style>
+    <style>
 
       .dice.rolling{
         transition: transform 1s linear;

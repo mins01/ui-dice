@@ -60,8 +60,8 @@ export default class Dice12Element extends HTMLElement {
         pointer-events: none;
         position: relative;
         margin: 0 auto;
-        width: 60%;
-        height: 60%;
+        width: 55%;
+        height: 55%;
         transform-style: preserve-3d;
         transform: rotateX(calc(var(--rx) + var(--rmx))) rotateY(calc(var(--ry) + var(--rmy))) rotateZ(calc(var(--rz) + var(--rmz)));
         /* transform: rotateX(0deg) rotateY(10deg) rotateZ(0deg); */
@@ -122,18 +122,18 @@ export default class Dice12Element extends HTMLElement {
         );
       }
 
-      .face:nth-child(1)::after {  background-color: hsl(0deg   80% 70%);  }
-      .face:nth-child(2)::after {  background-color: hsl(60deg  80% 70%);  }
-      .face:nth-child(3)::after {  background-color: hsl(120deg 80% 70%);  }
-      .face:nth-child(4)::after {  background-color: hsl(180deg 80% 70%);    }
-      .face:nth-child(5)::after {  background-color: hsl(240deg 80% 70%);    }
-      .face:nth-child(6)::after {  background-color: hsl(300deg 80% 70%);    }
-      .face:nth-child(7)::after {  background-color: hsl(0deg   30% 50%);    }
-      .face:nth-child(8)::after {  background-color: hsl(60deg  30% 50%);    }
-      .face:nth-child(9)::after {  background-color: hsl(120deg 30% 50%);    }
-      .face:nth-child(10)::after { background-color: hsl(180deg 30% 50%);    }
-      .face:nth-child(11)::after { background-color: hsl(240deg 30% 50%);    }
-      .face:nth-child(12)::after { background-color: hsl(300deg 30% 50%);    }
+      .face:nth-child(1)::after {   background-color: hsl(0deg   80% 70%);   }
+      .face:nth-child(2)::after {   background-color: hsl(30deg  80% 70%);   }
+      .face:nth-child(3)::after {   background-color: hsl(60deg  80% 70%);   }
+      .face:nth-child(4)::after {   background-color: hsl(90deg  80% 70%);   }
+      .face:nth-child(5)::after {   background-color: hsl(120deg 80% 70%);   }
+      .face:nth-child(6)::after {   background-color: hsl(150deg 80% 70%);   }
+      .face:nth-child(7)::after {   background-color: hsl(180deg 80% 70%);   }
+      .face:nth-child(8)::after {   background-color: hsl(210deg 80% 70%);   }
+      .face:nth-child(9)::after {   background-color: hsl(240deg 80% 70%);   }
+      .face:nth-child(10)::after {  background-color: hsl(270deg 80% 70%);   }
+      .face:nth-child(11)::after {  background-color: hsl(300deg 80% 70%);   }
+      .face:nth-child(12)::after {  background-color: hsl(330deg 80% 70%);   }
 
       
       .face .number {
