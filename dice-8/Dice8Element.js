@@ -42,6 +42,7 @@ export default class Dice8Element extends HTMLElement {
 
       .container {
         transform-style: preserve-3d;
+        perspective: 150cqw;
         width: 100%;
         height: 100%;
         aspect-ratio: 1/1;
@@ -60,8 +61,8 @@ export default class Dice8Element extends HTMLElement {
         pointer-events: none;
         position: relative;
         margin: 0 auto;
-        width: 80%;
-        height: 80%;
+        width: 85%;
+        height: 85%;
         transform-style: preserve-3d;
         transform: rotateX(calc(var(--rx) + var(--rmx))) rotateY(calc(var(--ry) + var(--rmy))) rotateZ(calc(var(--rz) + var(--rmz)));
         /* transform: rotateX(0deg) rotateY(45deg) rotateZ(0deg); */

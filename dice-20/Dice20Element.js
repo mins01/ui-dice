@@ -42,6 +42,7 @@ export default class Dice20Element extends HTMLElement {
 
       .container {
         transform-style: preserve-3d;
+        perspective: 50cqw;
         width: 100%;
         height: 100%;
         aspect-ratio: 1/1;
@@ -56,11 +57,11 @@ export default class Dice20Element extends HTMLElement {
       .dice {
         container-type: inline-size;
         aspect-ratio: 1/1;
-        /* pointer-events: none; */
+        pointer-events: none;
         position: relative;
         margin: 0 auto;
-        width: 50%;
-        height: 50%;
+        width: 55%;
+        height: 55%;
         transform-style: preserve-3d;
         /* transform: rotateX(calc(var(--rx) + var(--rmx))) rotateY(calc(var(--ry) + var(--rmy))) rotateZ(calc(var(--rz) + var(--rmz))); */
         transform: rotateX(calc(var(--rx) + var(--rmx))) rotateZ(calc(var(--rz) + var(--rmz))) rotateY(calc(var(--ry) + var(--rmy))) ;
